@@ -19,7 +19,7 @@ namespace Boardcamp.Domain.Customers
         public string Cpf { get; private set; } = null!;
         public DateOnly Birthday { get; private set; }
 
-        public static Result<Customer> Criar(string name, string phone, string cpf, DateOnly birthday)
+        public static Result<Customer> Create(string name, string phone, string cpf, DateOnly birthday)
         {
             if (string.IsNullOrEmpty(name)) return Result.Failure<Customer>("Você deve fornecer um nome para o usuário");
             if (string.IsNullOrEmpty(phone)) return Result.Failure<Customer>("Você deve fornececer um telefone para o usuário");
@@ -29,7 +29,7 @@ namespace Boardcamp.Domain.Customers
             return Result.Success(new Customer(name, phone, cpf, birthday));
         }
 
-        public Result Atualizar(string name, string phone, string cpf, DateOnly birthday)
+        public Result Update(string name, string phone, string cpf, DateOnly birthday)
         {
             if (string.IsNullOrEmpty(name)) return Result.Failure("Você deve fornecer um nome para o usuário");
             if (string.IsNullOrEmpty(phone)) return Result.Failure("Você deve fornececer um telefone para o usuário");

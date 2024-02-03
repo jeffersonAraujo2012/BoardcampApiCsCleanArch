@@ -53,6 +53,7 @@ namespace Boardcamp.Application.Games.UseCases.Upsert
 
         private async ValueTask<Result> Update(UpsertGameRequest request, CancellationToken cancellationToken)
         {
+            await Task.CompletedTask;
             return Result.Failure("Caso de uso não implementado.");
         }
     }
