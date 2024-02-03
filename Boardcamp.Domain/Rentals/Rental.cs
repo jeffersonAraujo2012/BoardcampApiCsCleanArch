@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace Boardcamp.Domain.Rentals
 {
-    public class Rental
+    public class Rental : Entity
     {
-        private Rental(long id, long customerId, long gameId, DateOnly rentDate, int daysRented, DateOnly? returnDate, decimal originalPrice)
+        private Rental(long customerId, long gameId, DateOnly rentDate, int daysRented, DateOnly? returnDate, decimal originalPrice)
         {
-            Id = id;
             CustomerId = customerId;
             GameId = gameId;
             RentDate = rentDate;
@@ -22,25 +21,22 @@ namespace Boardcamp.Domain.Rentals
 
         protected Rental() { }
 
-        public long Id { get; set; }
-        public long CustomerId { get; set; }
-        public long GameId { get; set; }
-        public DateOnly RentDate { get; set; }
-        public int DaysRented { get; set; }
-        public DateOnly? ReturnDate { get; set; }
-        public decimal OriginalPrice { get; set; }
-        public decimal DelayFee { get; set; } = 0;
+        public long CustomerId { get; private set; }
+        public long GameId { get; private set; }
+        public DateOnly RentDate { get; private set; }
+        public int DaysRented { get; private set; }
+        public DateOnly? ReturnDate { get; private set; }
+        public decimal OriginalPrice { get; private set; }
+        public decimal DelayFee { get; private set; } = 0;
 
-        public static Result<Rental> Criar(long id, long customerId, long gameId, int daysRented, decimal originalPrice)
+        public static Result<Rental> Criar(long customerId, long gameId, int daysRented, decimal originalPrice)
         {
-            if (id <= 0) return Result.Failure<Rental>("O id deve ser maior que 0");
             if (customerId <= 0) return Result.Failure<Rental>("O id do cliente deve ser maior que 0");
             if (gameId <= 0) return Result.Failure<Rental>("O id do game deve ser maior que 0");
             if (daysRented <= 0) return Result.Failure<Rental>("A quantidade de dias alugados não pode ser menor que 0");
             if (originalPrice <= 0) return Result.Failure<Rental>("O preço de locação não pode ser negativo");
 
             var rental = new Rental(
-                id,
                 customerId,
                 gameId,
                 DateOnly.FromDateTime(DateTime.Today),

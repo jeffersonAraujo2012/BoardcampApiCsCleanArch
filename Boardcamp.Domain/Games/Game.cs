@@ -20,11 +20,11 @@ namespace Boardcamp.Domain.Games
 
         protected Game() { }
 
-        public long Id { get; set; }
-        public string Name { get; set; } = null!;
-        public string Image { get; set; } = null!;
-        public int Stock { get; set; }
-        public decimal PricePerDay { get; set; }
+        public long Id { get; private set; }
+        public string Name { get; private set; } = null!;
+        public string Image { get; private set; } = null!;
+        public int Stock { get; private set; }
+        public decimal PricePerDay { get; private set; }
 
         public static Result<Game> Criar(long id, string name, string image, int stock, decimal pricePerDay)
         {
