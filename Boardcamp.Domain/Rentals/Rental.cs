@@ -1,4 +1,5 @@
-﻿using Boardcamp.Domain.Results;
+﻿using Boardcamp.Domain.Games;
+using Boardcamp.Domain.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,12 @@ namespace Boardcamp.Domain.Rentals
 {
     public class Rental : Entity
     {
-        private Rental(long customerId, long gameId, DateOnly rentDate, int daysRented, DateOnly? returnDate, decimal originalPrice)
+        private Rental(long customerId, long gameId, DateOnly rentDate, int daysRented, decimal originalPrice)
         {
             CustomerId = customerId;
             GameId = gameId;
             RentDate = rentDate;
             DaysRented = daysRented;
-            ReturnDate = returnDate;
             OriginalPrice = originalPrice;
         }
 
@@ -29,20 +29,17 @@ namespace Boardcamp.Domain.Rentals
         public decimal OriginalPrice { get; private set; }
         public decimal DelayFee { get; private set; } = 0;
 
-        public static Result<Rental> Criar(long customerId, long gameId, int daysRented, decimal originalPrice)
+        public static Result<Rental> Criar(long customerId, int daysRented, Game game)
         {
             if (customerId <= 0) return Result.Failure<Rental>("O id do cliente deve ser maior que 0");
-            if (gameId <= 0) return Result.Failure<Rental>("O id do game deve ser maior que 0");
             if (daysRented <= 0) return Result.Failure<Rental>("A quantidade de dias alugados não pode ser menor que 0");
-            if (originalPrice <= 0) return Result.Failure<Rental>("O preço de locação não pode ser negativo");
 
             var rental = new Rental(
                 customerId,
-                gameId,
+                game.Id,
                 DateOnly.FromDateTime(DateTime.Today),
                 daysRented,
-                null,
-                originalPrice
+                daysRented * game.PricePerDay
             );
 
             return Result.Success(rental);
