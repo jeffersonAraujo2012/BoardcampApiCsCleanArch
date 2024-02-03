@@ -13,6 +13,7 @@ namespace Boardcamp.Domain.Games.Repositories
         ValueTask<Result> Update(Game game);
         ValueTask<Game?> GetOneByName(string name);
         ValueTask<Game?> GetById(int id);
+        ValueTask<IEnumerable<Game>?> GetAll();
 
     }
 }
