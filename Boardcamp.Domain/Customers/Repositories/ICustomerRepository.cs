@@ -14,5 +14,6 @@ namespace Boardcamp.Domain.Customers.Repositories
         ValueTask<Customer?> GetByCpfAsync(string cpf);
         ValueTask<Customer?> GetByCpfExcludeAnyByIds(string cpf, IEnumerable<long> ignoreCustomersIds);
         ValueTask<Customer?> GetByIdAsync(long id);
+        ValueTask<IEnumerable<Customer>?> GetAllAsync();
     }
 }

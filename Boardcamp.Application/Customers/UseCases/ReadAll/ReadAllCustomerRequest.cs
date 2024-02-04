@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Boardcamp.Application.Customers.UseCases.ReadAll
 {
-    public class ReadAllCustomerRequest : IRequest<Result<IEnumerable<Customer>>>
+    public class ReadAllCustomerRequest : IRequest<Result<IEnumerable<Customer>?>>
     {
     }
 }
