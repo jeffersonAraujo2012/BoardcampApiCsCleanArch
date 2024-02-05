@@ -6,5 +6,6 @@ namespace Boardcamp.Domain.Rentals.Repositories
     {
         ValueTask<Result> CreateAsync(Rental rental);
         ValueTask<IEnumerable<Rental>> GetAllActivedByGameIdAsync(long gameId);
+        ValueTask<Rental?> GetByIdAsync(long id);
     }
 }
