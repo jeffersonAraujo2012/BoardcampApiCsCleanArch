@@ -12,7 +12,7 @@ namespace Boardcamp.Domain.Games.Repositories
         ValueTask<Result> Create(Game game);
         ValueTask<Result> Update(Game game);
         ValueTask<Game?> GetOneByName(string name);
-        ValueTask<Game?> GetById(int id);
+        ValueTask<Game?> GetByIdAsync(long id);
         ValueTask<IEnumerable<Game>?> GetAll();
 
     }

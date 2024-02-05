@@ -29,7 +29,7 @@ namespace Boardcamp.Domain.Rentals
         public decimal OriginalPrice { get; private set; }
         public decimal DelayFee { get; private set; } = 0;
 
-        public static Result<Rental> Criar(long customerId, int daysRented, Game game)
+        public static Result<Rental> Create(long customerId, int daysRented, Game game)
         {
             if (customerId <= 0) return Result.Failure<Rental>("O id do cliente deve ser maior que 0");
             if (daysRented <= 0) return Result.Failure<Rental>("A quantidade de dias alugados não pode ser menor que 0");
