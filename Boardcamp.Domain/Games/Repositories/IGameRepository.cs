@@ -9,11 +9,11 @@ namespace Boardcamp.Domain.Games.Repositories
 {
     public interface IGameRepository
     {
-        ValueTask<Result> Create(Game game);
-        ValueTask<Result> Update(Game game);
-        ValueTask<Game?> GetOneByName(string name);
+        ValueTask<Result> CreateAsync(Game game);
+        ValueTask<Result> UpdateAsync(Game game);
+        ValueTask<Game?> GetOneByNameAsync(string name);
         ValueTask<Game?> GetByIdAsync(long id);
-        ValueTask<IEnumerable<Game>?> GetAll();
+        ValueTask<IEnumerable<Game>?> GetAllAsync();
 
     }
 }
