@@ -1,4 +1,5 @@
-﻿using Boardcamp.Domain.Results;
+﻿using Boardcamp.Domain.Rentals;
+using Boardcamp.Domain.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace Boardcamp.Domain.Games
         public string Image { get; private set; } = null!;
         public int Stock { get; private set; }
         public decimal PricePerDay { get; private set; }
+        public virtual ICollection<Rental> Rentals { get; private set; } = null!;
 
         public static Result<Game> Criar(string name, string image, int stock, decimal pricePerDay)
         {

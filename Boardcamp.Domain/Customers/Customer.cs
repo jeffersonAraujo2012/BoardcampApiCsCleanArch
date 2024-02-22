@@ -1,4 +1,5 @@
-﻿using Boardcamp.Domain.Results;
+﻿using Boardcamp.Domain.Rentals;
+using Boardcamp.Domain.Results;
 
 namespace Boardcamp.Domain.Customers
 {
@@ -18,6 +19,7 @@ namespace Boardcamp.Domain.Customers
         public string Phone { get; private set; } = null!;
         public string Cpf { get; private set; } = null!;
         public DateOnly Birthday { get; private set; }
+        public virtual ICollection<Rental> Rentals { get; private set; } = null!;
 
         public static Result<Customer> Create(string name, string phone, string cpf, DateOnly birthday)
         {

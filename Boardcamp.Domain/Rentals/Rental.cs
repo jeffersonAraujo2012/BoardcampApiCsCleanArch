@@ -1,4 +1,5 @@
-﻿using Boardcamp.Domain.Games;
+﻿using Boardcamp.Domain.Customers;
+using Boardcamp.Domain.Games;
 using Boardcamp.Domain.Results;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,8 @@ namespace Boardcamp.Domain.Rentals
         public DateOnly? ReturnDate { get; private set; }
         public decimal OriginalPrice { get; private set; }
         public decimal DelayFee { get; private set; } = 0;
+        public virtual Game Game { get; private set; } = null!;
+        public virtual Customer Customer { get; private set; } = null!;
 
         public static Result<Rental> Create(long customerId, int daysRented, Game game)
         {
