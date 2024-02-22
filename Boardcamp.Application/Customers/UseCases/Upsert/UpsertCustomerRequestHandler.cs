@@ -53,7 +53,7 @@ namespace Boardcamp.Application.Customers.UseCases.Upsert
             var customer = await _customerRepository.GetByIdAsync(request.Id ?? 0);
             if (customer is null) return Result.Failure("Cliente não encontrado na base do sistema");
 
-            var otherCustomerSameCpf = await _customerRepository.GetByCpfExcludeAnyByIds(request.Cpf, new List<long> { request.Id ?? 0 });
+            var otherCustomerSameCpf = await _customerRepository.GetByCpfExcludeAnyByIdsAsync(request.Cpf, new List<long> { request.Id ?? 0 });
             if (otherCustomerSameCpf is not null) return Result.Failure("Já existe outro usuário com o mesmo cpf cadastrado.");
 
             var updateResult = customer.Update(

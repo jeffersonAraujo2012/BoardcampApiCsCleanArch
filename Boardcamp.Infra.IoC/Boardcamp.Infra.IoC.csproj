@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Boardcamp.Application\Boardcamp.Application.csproj" />
+    <ProjectReference Include="..\Boardcamp.Domain\Boardcamp.Domain.csproj" />
+    <ProjectReference Include="..\Boardcamp.Infra.Data\Boardcamp.Infra.Data.csproj" />
+  </ItemGroup>
+
 </Project>

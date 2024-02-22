@@ -21,7 +21,7 @@ namespace Boardcamp.Application.Games.UseCases.ReadAll
 
         public async Task<Result<IEnumerable<Game>?>> Handle(ReadAllGamesRequest request, CancellationToken cancellationToken)
         {
-            var games = await _gameRepository.GetAll();
+            var games = await _gameRepository.GetAllAsync();
             return Result.Success(games);
         }
     }

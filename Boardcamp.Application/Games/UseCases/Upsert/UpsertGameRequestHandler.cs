@@ -33,7 +33,7 @@ namespace Boardcamp.Application.Games.UseCases.Upsert
 
         private async ValueTask<Result> Create(UpsertGameRequest request, CancellationToken cancellationToken)
         {
-            var gameSameName = await _gameRepository.GetOneByName(request.Name);
+            var gameSameName = await _gameRepository.GetOneByNameAsync(request.Name);
             if (gameSameName is null) return Result.Failure("Já existe um jogo com o mesmo nome. Use um nome diferente.");
 
             var game = Game.Criar(
