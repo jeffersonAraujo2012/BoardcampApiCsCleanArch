@@ -12,7 +12,7 @@ namespace Boardcamp.Domain.Customers.Repositories
         ValueTask<Result> CreateAsync(Customer customer);
         ValueTask<Result> UpdateAsync(Customer customer);
         ValueTask<Customer?> GetByCpfAsync(string cpf);
-        ValueTask<Customer?> GetByCpfExcludeAnyByIds(string cpf, IEnumerable<long> ignoreCustomersIds);
+        ValueTask<Customer?> GetByCpfExcludeAnyByIdsAsync(string cpf, IEnumerable<long> ignoreCustomersIds);
         ValueTask<Customer?> GetByIdAsync(long id);
         ValueTask<IEnumerable<Customer>?> GetAllAsync();
     }

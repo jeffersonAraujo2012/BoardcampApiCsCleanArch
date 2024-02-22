@@ -3,11 +3,6 @@ using Boardcamp.Domain.Games.Repositories;
 using Boardcamp.Domain.Results;
 using Boardcamp.Infra.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Boardcamp.Infra.Data.Repositories
 {
