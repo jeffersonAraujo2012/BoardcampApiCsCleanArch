@@ -1,3 +1,4 @@
+using Boardcamp.Infra.Data.Contexts;
 using Boardcamp.Infra.IoC;
 
 var builder = WebApplication.CreateBuilder(args);

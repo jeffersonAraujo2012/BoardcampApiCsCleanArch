@@ -9,7 +9,7 @@ namespace Boardcamp.Infra.Data.EntitiesConfigurations
         public void Configure(EntityTypeBuilder<Customer> builder)
         {
             builder.ToTable("customers");
-            builder.HasKey(x => x.Id).HasName("PRIMARY");
+            builder.HasKey(x => x.Id).HasName("pk_customers");
 
             builder.Property(x => x.Id)
                 .HasColumnName("id");
