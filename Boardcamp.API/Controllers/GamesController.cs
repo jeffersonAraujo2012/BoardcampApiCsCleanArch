@@ -1,4 +1,5 @@
 ﻿using Boardcamp.Application.Games.UseCases.ReadAll;
+using Boardcamp.Application.Games.UseCases.Upsert;
 using Boardcamp.Domain.Games;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +30,19 @@ namespace Boardcamp.API.Controllers
             }
 
             return Ok(games.Value);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> InsertGames(UpsertGameRequest request)
+        {
+            var resultInsert = await _mediator.Send(request);
+
+            if (resultInsert.IsFailure)
+            {
+                return BadRequest(resultInsert.ErrorMessage);
+            }
+
+            return Created();
         }
     }
 }
