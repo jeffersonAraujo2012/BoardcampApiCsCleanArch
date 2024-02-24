@@ -37,7 +37,7 @@ namespace Boardcamp.API.Controllers
         [Route("{id}")]
         public async Task<ActionResult<Customer>> GetCustomerById([FromRoute] int id)
         {
-            var request = new ReadByIdCustomerRequest { Id = id };
+            var request = new ReadByIdRentalRequest { Id = id };
 
             var readByIdResult = await _mediator.Send(request);
 

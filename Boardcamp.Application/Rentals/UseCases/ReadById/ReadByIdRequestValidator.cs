@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Boardcamp.Application.Customers.UseCases.ReadById
+namespace Boardcamp.Application.Rentals.UseCases.ReadById
 {
     public class ReadByIdRequestValidator : AbstractValidator<ReadByIdRentalRequest>
     {
@@ -8,7 +8,7 @@ namespace Boardcamp.Application.Customers.UseCases.ReadById
         {
             RuleFor(p => p.Id)
                 .GreaterThan(0)
-                .WithMessage("O id do cliente deve ser maior que 0");
+                .WithMessage("O id do aluguél deve ser maior que 0");
         }
     }
 }

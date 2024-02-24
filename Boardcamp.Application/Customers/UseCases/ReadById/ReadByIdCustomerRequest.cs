@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Boardcamp.Application.Customers.UseCases.ReadById
 {
-    public class ReadByIdCustomerRequest : IRequest<Result<Customer>>
+    public class ReadByIdRentalRequest : IRequest<Result<Customer>>
     {
         public long Id { get; set; }
     }
