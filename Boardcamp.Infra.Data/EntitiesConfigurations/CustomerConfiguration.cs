@@ -19,6 +19,11 @@ namespace Boardcamp.Infra.Data.EntitiesConfigurations
                 .IsRequired()
                 .HasColumnName("name");
 
+            builder.Property(x => x.Phone)
+                .HasMaxLength(11)
+                .IsRequired()
+                .HasColumnName("phone");
+
             builder.Property(x => x.Cpf)
                 .HasMaxLength(11)
                 .IsRequired()

@@ -1,11 +1,6 @@
 ﻿using Boardcamp.Domain.Customers;
 using Boardcamp.Domain.Games;
 using Boardcamp.Domain.Results;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Boardcamp.Domain.Rentals
 {
@@ -28,7 +23,7 @@ namespace Boardcamp.Domain.Rentals
         public int DaysRented { get; private set; }
         public DateOnly? ReturnDate { get; private set; }
         public decimal OriginalPrice { get; private set; }
-        public decimal DelayFee { get; private set; } = 0;
+        public decimal? DelayFee { get; private set; }
         public virtual Game Game { get; private set; } = null!;
         public virtual Customer Customer { get; private set; } = null!;
 
@@ -59,6 +54,10 @@ namespace Boardcamp.Domain.Rentals
             {
                 int totalDelayDays = (int)(DateTime.Today - new DateTime(predictedReturnDate.Year, predictedReturnDate.Month, predictedReturnDate.Day)).TotalDays;
                 DelayFee = totalDelayDays * (OriginalPrice / DaysRented);
+            }
+            else
+            {
+                DelayFee = 0;
             }
 
             return Result.Success();

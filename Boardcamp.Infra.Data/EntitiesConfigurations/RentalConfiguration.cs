@@ -36,6 +36,7 @@ namespace Boardcamp.Infra.Data.EntitiesConfigurations
                 .HasColumnName("original_price");
 
             builder.Property(x => x.DelayFee)
+                .HasPrecision(5,2)
                 .HasColumnName("delay_fee");
 
             builder.Property(x => x.ReturnDate)
