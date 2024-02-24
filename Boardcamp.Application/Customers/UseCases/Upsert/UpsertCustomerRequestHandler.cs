@@ -1,4 +1,6 @@
-﻿using Boardcamp.Domain.Customers;
+﻿using Boardcamp.Application.HandlersBase;
+using Boardcamp.Domain;
+using Boardcamp.Domain.Customers;
 using Boardcamp.Domain.Customers.Repositories;
 using Boardcamp.Domain.Results;
 using MediatR;
@@ -10,11 +12,11 @@ using System.Threading.Tasks;
 
 namespace Boardcamp.Application.Customers.UseCases.Upsert
 {
-    public class UpsertCustomerRequestHandler : IRequestHandler<UpsertCustomerRequest, Result>
+    public class UpsertCustomerRequestHandler : HandlerBase, IRequestHandler<UpsertCustomerRequest, Result>
     {
         private readonly ICustomerRepository _customerRepository;
 
-        public UpsertCustomerRequestHandler(ICustomerRepository customerRepository)
+        public UpsertCustomerRequestHandler(IUnitOfWork unitOfWork, ICustomerRepository customerRepository) : base(unitOfWork)
         {
             _customerRepository = customerRepository;
         }
@@ -43,7 +45,11 @@ namespace Boardcamp.Application.Customers.UseCases.Upsert
                 return Result.Failure(customer.ErrorMessage!);
             }
 
-            await _customerRepository.CreateAsync(customer.Value!);
+            var createResult = await _customerRepository.CreateAsync(customer.Value!);
+
+            if (createResult.IsFailure) return createResult;
+
+            await _unitOfWork.CommitAsync(cancellationToken);
 
             return Result.Success();
         }
@@ -68,7 +74,11 @@ namespace Boardcamp.Application.Customers.UseCases.Upsert
                 return updateResult;
             }
 
-            await _customerRepository.UpdateAsync(customer);
+            var updateRepositoryResult = await _customerRepository.UpdateAsync(customer);
+
+            if (updateRepositoryResult.IsFailure) return updateRepositoryResult;
+
+            await _unitOfWork.CommitAsync(cancellationToken);
 
             return Result.Success();
         }

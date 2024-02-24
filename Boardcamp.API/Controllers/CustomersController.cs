@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Boardcamp.API.Controllers
 {
     [ApiController]
+    [Route("[controller]")]
     public class CustomersController : ControllerBase
     {
         private readonly IMediator _mediator;
