@@ -1,4 +1,5 @@
 ﻿using Boardcamp.Application.Customers.UseCases.ReadById;
+using Boardcamp.Application.Rentals.UseCases.Delete;
 using Boardcamp.Application.Rentals.UseCases.Insert;
 using Boardcamp.Application.Rentals.UseCases.ReadAll;
 using Boardcamp.Application.Rentals.UseCases.Return;
@@ -68,6 +69,22 @@ namespace Boardcamp.API.Controllers
         public async Task<IActionResult> ReturnRentalById([FromRoute] int id)
         {
             var request = new ReturnRentalRequest { Id = id };
+
+            var resultRequest = await _mediator.Send(request);
+
+            if (resultRequest.IsFailure)
+            {
+                return BadRequest(resultRequest.ErrorMessage);
+            }
+
+            return NoContent();
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> DeleteById([FromRoute] int id)
+        {
+            var request = new DeleteRentalRequest { Id = id };
 
             var resultRequest = await _mediator.Send(request);
 

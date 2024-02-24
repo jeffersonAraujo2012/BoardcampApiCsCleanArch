@@ -1,4 +1,6 @@
-﻿using Boardcamp.Domain.Customers.Repositories;
+﻿using Boardcamp.Application.HandlersBase;
+using Boardcamp.Domain;
+using Boardcamp.Domain.Customers.Repositories;
 using Boardcamp.Domain.Games.Repositories;
 using Boardcamp.Domain.Rentals;
 using Boardcamp.Domain.Rentals.Repositories;
@@ -7,13 +9,13 @@ using MediatR;
 
 namespace Boardcamp.Application.Rentals.UseCases.Insert
 {
-    public class InsertRentalRequestHandler : IRequestHandler<InsertRentalRequest, Result>
+    public class InsertRentalRequestHandler : HandlerBase, IRequestHandler<InsertRentalRequest, Result>
     {
         private readonly IRentalRepository _rentalRepository;
         private readonly ICustomerRepository _customerRepository;
         private readonly IGameRepository _gameRepository;
 
-        public InsertRentalRequestHandler(IRentalRepository rentalRepository, ICustomerRepository customerRepository, IGameRepository gameRepository)
+        public InsertRentalRequestHandler(IUnitOfWork unitOfWork, IRentalRepository rentalRepository, ICustomerRepository customerRepository, IGameRepository gameRepository) : base(unitOfWork)
         {
             _rentalRepository = rentalRepository;
             _customerRepository = customerRepository;
@@ -44,6 +46,8 @@ namespace Boardcamp.Application.Rentals.UseCases.Insert
             }
 
             await _rentalRepository.CreateAsync(createRentalResult.Value!);
+
+            await _unitOfWork.CommitAsync(cancellationToken);
 
             return Result.Success();
         }
