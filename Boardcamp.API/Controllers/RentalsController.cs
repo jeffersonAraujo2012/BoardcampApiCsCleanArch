@@ -2,6 +2,7 @@
 using Boardcamp.Application.Rentals.UseCases.Delete;
 using Boardcamp.Application.Rentals.UseCases.Insert;
 using Boardcamp.Application.Rentals.UseCases.ReadAll;
+using Boardcamp.Application.Rentals.UseCases.ReadById;
 using Boardcamp.Application.Rentals.UseCases.Return;
 using Boardcamp.Domain.Rentals;
 using MediatR;

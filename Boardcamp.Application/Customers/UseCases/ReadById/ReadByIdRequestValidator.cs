@@ -2,7 +2,7 @@
 
 namespace Boardcamp.Application.Customers.UseCases.ReadById
 {
-    public class ReadByIdRequestValidator : AbstractValidator<ReadByIdRentalRequest>
+    public class ReadByIdRequestValidator : AbstractValidator<ReadByIdCustomerRequest>
     {
         public ReadByIdRequestValidator()
         {
