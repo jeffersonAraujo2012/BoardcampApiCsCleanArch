@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,6 +29,9 @@ namespace Boardcamp.Infra.IoC
             services.AddScoped<IGameRepository, GameRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IRentalRepository, RentalRepository>();
+
+            var myHandlers = AppDomain.CurrentDomain.Load("Boardcamp.Application");
+            services.AddMediatR(p => p.RegisterServicesFromAssembly(myHandlers));
 
             return services;
         }

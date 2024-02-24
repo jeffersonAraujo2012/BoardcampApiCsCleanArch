@@ -1,6 +1,6 @@
 @Boardcamp.API_HostAddress = http://localhost:5269
 
-GET {{Boardcamp.API_HostAddress}}/weatherforecast/
+GET {{Boardcamp.API_HostAddress}}/games/
 Accept: application/json
 
 ###
