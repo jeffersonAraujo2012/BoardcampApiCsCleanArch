@@ -1,6 +1,8 @@
-﻿using Boardcamp.Domain.Customers.Repositories;
+﻿using Boardcamp.Domain;
+using Boardcamp.Domain.Customers.Repositories;
 using Boardcamp.Domain.Games.Repositories;
 using Boardcamp.Domain.Rentals.Repositories;
+using Boardcamp.Infra.Data;
 using Boardcamp.Infra.Data.Contexts;
 using Boardcamp.Infra.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +31,7 @@ namespace Boardcamp.Infra.IoC
             services.AddScoped<IGameRepository, GameRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IRentalRepository, RentalRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             var myHandlers = AppDomain.CurrentDomain.Load("Boardcamp.Application");
             services.AddMediatR(p => p.RegisterServicesFromAssembly(myHandlers));

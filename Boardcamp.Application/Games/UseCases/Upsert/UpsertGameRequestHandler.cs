@@ -45,6 +45,13 @@ namespace Boardcamp.Application.Games.UseCases.Upsert
                 return Result.Failure(game.ErrorMessage!);
             }
 
+            var createResult = await _gameRepository.CreateAsync(game.Value!);
+
+            if (createResult.IsFailure)
+            {
+                return createResult;
+            }
+
             await _unitOfWork.CommitAsync(cancellationToken);
 
             return Result.Success();
