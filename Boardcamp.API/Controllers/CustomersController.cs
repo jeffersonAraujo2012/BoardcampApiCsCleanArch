@@ -1,5 +1,6 @@
 ﻿using Boardcamp.Application.Customers.UseCases.ReadAll;
 using Boardcamp.Application.Customers.UseCases.ReadById;
+using Boardcamp.Application.Customers.UseCases.Upsert;
 using Boardcamp.Domain.Customers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -45,6 +46,35 @@ namespace Boardcamp.API.Controllers
             }
 
             return Ok(readByIdResult.Value);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> InsertCustomer(UpsertCustomerRequest request)
+        {
+            var insertResult = await _mediator.Send(request);
+
+            if (insertResult.IsFailure)
+            {
+                return BadRequest(insertResult.ErrorMessage);
+            }
+
+            return Created();
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> UpdateCustomer(UpsertCustomerRequest request, [FromRoute] int id)
+        {
+            request.Id = id;
+
+            var updateResult = await _mediator.Send(request);
+
+            if (updateResult.IsFailure)
+            {
+                return BadRequest(updateResult.ErrorMessage);
+            }
+
+            return Ok();
         }
     }
 }
